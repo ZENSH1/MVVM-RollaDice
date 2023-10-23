@@ -31,6 +31,7 @@ class HomePageViewModel @Inject constructor(
         private set
 
     var diceRoll by mutableStateOf(0)
+
     var name by mutableStateOf("G")
 
     private val _uiEvent = Channel<UiEvent>()
@@ -43,12 +44,9 @@ class HomePageViewModel @Inject constructor(
     fun onEvent(event: HomePageEvent) {
         when (event) {
             HomePageEvent.OnChangeNameClick -> {
-
             }
 
             HomePageEvent.OnHistoryClick -> {
-
-
             }
 
             HomePageEvent.OnRollClick -> {
@@ -60,18 +58,15 @@ class HomePageViewModel @Inject constructor(
                         historyRoll = HistoryRoll(
                             name = name,
                             roll = diceRoll+1,
-                            date = LocalDateTime.now().toString()
+                            date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd / MM / yyyy | HH:mm"))
                         )
                     )
                     delay(100)
                     diceRolled = true
-                    delay(1000)
-                    buttonPressable = true
-                    delay(4000)
+                    delay(2000)
                     diceRolled = false
-
-
-
+                    delay(500)
+                    buttonPressable = true
                 }
 
             }

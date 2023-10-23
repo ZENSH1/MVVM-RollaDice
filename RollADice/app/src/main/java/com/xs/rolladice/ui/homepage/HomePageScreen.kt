@@ -79,7 +79,7 @@ fun HomePageScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
-                HomeHeading(onClicked = { viewModel.sendUiEvent(UiEvent.Navigate(ROUTES.View_History)) })
+                HomeHeading(onClicked = { viewModel.sendUiEvent(UiEvent.Navigate(ROUTES.View_History+"?name=${viewModel.name}")) })
                 DiceHolder(
                     DrawableHandler.DrawablesDiceData[viewModel.diceRoll],
                     viewModel.name,
@@ -116,7 +116,7 @@ fun HomeHeading(onClicked: () -> Unit) {
             textAlign = TextAlign.Center
         )
         DiceColoredText(
-            title = "By Xi",
+            title = "By Zain Sherazi",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(4.dp),

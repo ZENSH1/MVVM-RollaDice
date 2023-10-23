@@ -3,7 +3,6 @@ package com.xs.rolladice.di
 import android.app.Application
 import androidx.room.Room
 import com.xs.rolladice.data.HistoryRollDao
-import com.xs.rolladice.data.HistoryRollDatabase
 import com.xs.rolladice.data.NameDao
 import com.xs.rolladice.data.NameDatabase
 import com.xs.rolladice.repository.HistoryRollRepository
@@ -41,19 +40,10 @@ object AppModule {
         return NameRepositoryImpl(dao)
     }
 
-    @Provides
-    @Singleton
-    fun providesHistoryRollDatabase(app: Application): HistoryRollDatabase {
-        return Room.databaseBuilder(
-            app,
-            HistoryRollDatabase::class.java,
-            "historyRoll_db"
-        ).build()
-    }
 
     @Provides
     @Singleton
-    fun provideHistoryRollDao(database: HistoryRollDatabase) = database.historyRollDao
+    fun provideHistoryRollDao(database: NameDatabase) = database.historyRollDao
 
 
     @Provides

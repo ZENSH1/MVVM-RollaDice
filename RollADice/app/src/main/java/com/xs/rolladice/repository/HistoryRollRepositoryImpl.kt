@@ -10,13 +10,10 @@ class HistoryRollRepositoryImpl(
     override suspend fun insertHistoryRoll(historyRoll: HistoryRoll) {
         historyRollDao.insertHistoryRoll(historyRoll)
     }
-
     override suspend fun deleteHistoryRoll(historyRoll: HistoryRoll) {
         historyRollDao.deleteHistoryRoll(historyRoll)
     }
-
-    override fun getHistoryRolls(): Flow<List<HistoryRoll>> {
-        return historyRollDao.getHistoryRolls()
+    override fun getHistoryRolls(name: String): Flow<List<HistoryRoll>> {
+        return historyRollDao.getHistoryRolls(name )
     }
-
 }

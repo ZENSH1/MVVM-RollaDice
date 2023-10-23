@@ -11,5 +11,5 @@ interface HistoryRollRepository {
 
     suspend fun deleteHistoryRoll(historyRoll: HistoryRoll)
 
-     fun getHistoryRolls(): Flow<List<HistoryRoll>>
+     fun getHistoryRolls(name:String): Flow<List<HistoryRoll>>
 }

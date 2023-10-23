@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navigation
 import com.xs.rolladice.ui.historypage.HistoryRollScreen
 import com.xs.rolladice.ui.homepage.HomePageScreen
 import com.xs.rolladice.ui.namepage.NamePageScreen
@@ -34,11 +35,17 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
 
                 NavHost(navController = navController, startDestination = ROUTES.Splash_Screen) {
-                    composable(ROUTES.Splash_Screen){
-                        SplashScreen { navController.navigate(it.route,
-                            navOptions = NavOptions.Builder().setPopUpTo(ROUTES.Splash_Screen, true).build()) }
-
+                    
+                    composable(ROUTES.Splash_Screen) {
+                        SplashScreen {
+                            navController.navigate(
+                                it.route,
+                                navOptions = NavOptions.Builder()
+                                    .setPopUpTo(ROUTES.Splash_Screen, true).build()
+                            )
+                        }
                     }
+
                     composable(ROUTES.Change_Name) {
                         NamePageScreen(onNavigate = {
                             navController.navigate(it.route)
@@ -46,17 +53,28 @@ class MainActivity : ComponentActivity() {
 
 
                     }
-                    composable(ROUTES.Home_Page + "?name={name}", arguments = listOf(navArgument(name = "name") {
+
+                    //Todo: Here is NavArg Composable in Navigation
+                    composable(
+                        ROUTES.Home_Page + "?name={name}",
+                        arguments = listOf(navArgument(name = "name") {
                             type = NavType.StringType
                             defaultValue = "Guest"
-                        })) {
+                        })
+                    ) {
                         HomePageScreen(onNavigate = {
                             navController.navigate(it.route)
                         }, onPopBackStack = {
                             navController.popBackStack()
                         })
                     }
-                    composable(ROUTES.View_History) {
+
+                    composable(
+                        ROUTES.View_History + "?name={name}",
+                        arguments = listOf(navArgument(name = "name"){
+                        type = NavType.StringType
+                        defaultValue = "Zain Sherazi"
+                    })) {
                         HistoryRollScreen()
                     }
 

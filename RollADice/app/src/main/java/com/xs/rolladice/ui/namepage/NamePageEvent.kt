@@ -11,6 +11,6 @@ sealed class NamePageEvent {
     object OnViewName: NamePageEvent()
     //Done
     object OnUndoDelete: NamePageEvent()
-    //Todo: Navigation to other screen
+
     data class OnNameClick(val name: String): NamePageEvent()
 }
