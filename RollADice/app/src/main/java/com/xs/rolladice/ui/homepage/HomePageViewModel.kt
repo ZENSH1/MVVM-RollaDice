@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xs.rolladice.data.HistoryRoll
+import com.xs.rolladice.data.local.model.HistoryRoll
 import com.xs.rolladice.repository.HistoryRollRepository
 import com.xs.rolladice.utils.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +24,8 @@ class HomePageViewModel @Inject constructor(
     private val historyRepository: HistoryRollRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+    var diceRotation by mutableStateOf(false)
 
     var diceRolled by mutableStateOf(false)
         private set
@@ -51,8 +53,10 @@ class HomePageViewModel @Inject constructor(
 
             HomePageEvent.OnRollClick -> {
                 viewModelScope.launch {
-                    buttonPressable = false
 
+                    buttonPressable = false
+                    delay(100)
+                    diceRolled = true
                     diceRoll = Random.nextInt(6)
                     historyRepository.insertHistoryRoll(
                         historyRoll = HistoryRoll(
@@ -61,12 +65,11 @@ class HomePageViewModel @Inject constructor(
                             date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd / MM / yyyy | HH:mm"))
                         )
                     )
-                    delay(100)
-                    diceRolled = true
                     delay(2000)
                     diceRolled = false
                     delay(500)
                     buttonPressable = true
+
                 }
 
             }

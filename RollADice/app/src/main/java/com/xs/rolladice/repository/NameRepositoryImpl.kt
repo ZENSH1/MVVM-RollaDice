@@ -1,7 +1,7 @@
 package com.xs.rolladice.repository
 
-import com.xs.rolladice.data.Name
-import com.xs.rolladice.data.NameDao
+import com.xs.rolladice.data.local.model.Name
+import com.xs.rolladice.data.local.dao.NameDao
 import kotlinx.coroutines.flow.Flow
 
 class NameRepositoryImpl(private val nameDao: NameDao

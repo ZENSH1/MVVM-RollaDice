@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.xs.rolladice.data.HistoryRoll
+import com.xs.rolladice.data.local.model.HistoryRoll
 import com.xs.rolladice.ui.homepage.DiceColoredText
 import com.xs.rolladice.utils.DrawableHandler
 

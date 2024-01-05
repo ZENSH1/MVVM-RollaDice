@@ -1,6 +1,7 @@
 package com.xs.rolladice.ui.homepage
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,8 +22,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -32,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.xs.rolladice.R
+import com.xs.rolladice.ui.theme.MVVMRollADiceAppTheme
 import com.xs.rolladice.utils.DrawableHandler
 import com.xs.rolladice.utils.ROUTES
 import com.xs.rolladice.utils.UiEvent
@@ -69,8 +73,6 @@ fun HomePageScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = { MyTopBar("Home Page", Icons.Default.Home) },
         content = {
-
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -83,7 +85,7 @@ fun HomePageScreen(
                 DiceHolder(
                     DrawableHandler.DrawablesDiceData[viewModel.diceRoll],
                     viewModel.name,
-                    viewModel.diceRolled
+                    viewModel.diceRolled,
                 )
                 ButtonHolder(
                     changeName = { viewModel.sendUiEvent(UiEvent.PopBackStack) },
@@ -128,23 +130,24 @@ fun HomeHeading(onClicked: () -> Unit) {
 }
 
 
-@Preview
 @Composable
 fun DiceHolder(
     diceNumPair: DrawableHandler.DiceNumPair = DrawableHandler.DrawablesDiceData[1],
-    name: String = "Guest",
-    diceRolled: Boolean = true
+    name: String,
+    diceRolled: Boolean
 ) {
     Column(
         modifier = Modifier,
         Arrangement.Center,
         Alignment.CenterHorizontally
     ) {
-
+        val degrees: Float by animateFloatAsState(if (diceRolled) 360f else 0f, label = "Rotation of Dice")
         Image(
             painter = painterResource(id = diceNumPair.drawable),
             contentDescription = "Dice",
-            modifier = Modifier.padding(15.dp)
+            modifier = Modifier
+                .padding(15.dp)
+                .rotate(degrees)
         )
         AnimatedVisibility(visible = diceRolled) {
             DiceColoredText(
@@ -189,6 +192,19 @@ fun ButtonHolder(changeName: () -> Unit, onRollClick: () -> Unit, diceRolled: Bo
     }
 }
 
-
+@Preview
+@Composable
+fun PreviewHome(){
+    MVVMRollADiceAppTheme {
+        Column(
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            HomeHeading {}
+            DiceHolder(name = "Zain", diceRolled = true)
+            ButtonHolder(changeName = { /*TODO*/ }, onRollClick = { /*TODO*/ }, diceRolled = true)
+        }
+    }
+}
 
 

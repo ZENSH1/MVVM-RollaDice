@@ -1,7 +1,5 @@
 package com.xs.rolladice.ui.namepage
 
-import com.xs.rolladice.data.Name
-
 /** Useless For Now
  */
 sealed class NamePageEvent {

@@ -1,7 +1,7 @@
 package com.xs.rolladice.repository
 
-import com.xs.rolladice.data.HistoryRoll
-import com.xs.rolladice.data.HistoryRollDao
+import com.xs.rolladice.data.local.model.HistoryRoll
+import com.xs.rolladice.data.local.dao.HistoryRollDao
 import kotlinx.coroutines.flow.Flow
 
 class HistoryRollRepositoryImpl(

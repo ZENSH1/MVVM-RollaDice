@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xs.rolladice.data.Name
+import com.xs.rolladice.data.local.model.Name
 import com.xs.rolladice.repository.NameRepository
 import com.xs.rolladice.utils.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel

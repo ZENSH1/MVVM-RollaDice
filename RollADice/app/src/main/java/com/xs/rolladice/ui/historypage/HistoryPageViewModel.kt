@@ -1,17 +1,14 @@
 package com.xs.rolladice.ui.historypage
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
-import com.xs.rolladice.repository.HistoryRollRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xs.rolladice.data.HistoryRoll
+import com.xs.rolladice.data.local.model.HistoryRoll
+import com.xs.rolladice.repository.HistoryRollRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class HistoryPageViewModel @Inject constructor(
@@ -26,9 +23,9 @@ class HistoryPageViewModel @Inject constructor(
         }
     }
 
+
     init {
         name = savedStateHandle.get<String>("name").toString()
         historyRolls = historyRollRepository.getHistoryRolls(name)
     }
-
 }

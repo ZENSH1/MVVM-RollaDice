@@ -2,9 +2,9 @@ package com.xs.rolladice.di
 
 import android.app.Application
 import androidx.room.Room
-import com.xs.rolladice.data.HistoryRollDao
-import com.xs.rolladice.data.NameDao
-import com.xs.rolladice.data.NameDatabase
+import com.xs.rolladice.data.local.dao.HistoryRollDao
+import com.xs.rolladice.data.local.dao.NameDao
+import com.xs.rolladice.data.local.db.NameDatabase
 import com.xs.rolladice.repository.HistoryRollRepository
 import com.xs.rolladice.repository.HistoryRollRepositoryImpl
 import com.xs.rolladice.repository.NameRepository

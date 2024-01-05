@@ -72,7 +72,6 @@ fun NamePageScreen(
                         it.msg, it.action,
                         duration = SnackbarDuration.Short
                     )
-
                 }
 
                 UiEvent.ShowDialogBox -> {
@@ -85,7 +84,7 @@ fun NamePageScreen(
 
     Scaffold(
         topBar = { MyTopBar(title = "Add/Edit Names", icon = Icons.TwoTone.Create) },
-        snackbarHost = { MySnackBar(snackbarHostState = snackbarHostState, onUndoDelete = { viewModel.onUndoDelete() }) }
+        snackbarHost = { MySnackBar(snackBarHostState = snackbarHostState, onUndoDelete = { viewModel.onUndoDelete() }) }
     ) {
 
         Column(

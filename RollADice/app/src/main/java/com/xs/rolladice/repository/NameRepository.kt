@@ -1,6 +1,6 @@
 package com.xs.rolladice.repository
 
-import com.xs.rolladice.data.Name
+import com.xs.rolladice.data.local.model.Name
 import kotlinx.coroutines.flow.Flow
 
 interface NameRepository {

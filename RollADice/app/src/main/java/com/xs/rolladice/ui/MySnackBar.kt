@@ -13,9 +13,9 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,34 +24,23 @@ import com.xs.rolladice.ui.theme.MVVMRollADiceAppTheme
 
 @Composable
 fun MySnackBar(
-    snackbarHostState:SnackbarHostState,
+    snackBarHostState:SnackbarHostState,
     onUndoDelete: ()-> Unit
 ){
-    SnackbarHost(hostState = snackbarHostState) {
-        Card(
-            modifier = Modifier.padding(horizontal = 5.dp),
-            elevation = CardDefaults.cardElevation(10.dp),
-            colors = CardDefaults.cardColors(Color.White)
-        ) {
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 10.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                DiceColoredText(title = it.visuals.message, textAlign = TextAlign.Center, style = MaterialTheme.typography.labelLarge)
-                TextButton(onClick = onUndoDelete) {
-                    Text(text = "" + it.visuals.actionLabel)
-                }
-            }
-        }
+    SnackbarHost(hostState = snackBarHostState) {
+    SnackBarUi(it = it) {
+        onUndoDelete()
+    }
     }
 }
 
 @Composable
 fun SnackBarUi(it:SnackbarData?, onUndoDelete: () -> Unit){
     Card(
-        modifier = Modifier.padding(horizontal = 5.dp),
+        modifier = Modifier
+            .padding(horizontal = 5.dp)
+            .padding(bottom = 15.dp)
+            .padding(top = 5.dp),
         elevation = CardDefaults.cardElevation(10.dp),
         colors = CardDefaults.cardColors(Color.White)
     ) {
@@ -59,11 +48,14 @@ fun SnackBarUi(it:SnackbarData?, onUndoDelete: () -> Unit){
             modifier = Modifier
                 .padding(horizontal = 10.dp)
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            DiceColoredText(title = it!!.visuals.message, textAlign = TextAlign.Center, style = MaterialTheme.typography.labelLarge)
+            DiceColoredText(title = ""+it?.visuals?.message,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.labelLarge)
             TextButton(onClick = onUndoDelete) {
-                Text(text = "" + it.visuals.actionLabel)
+                Text(text = "" + it?.visuals?.actionLabel)
             }
         }
     }
@@ -73,7 +65,11 @@ fun SnackBarUi(it:SnackbarData?, onUndoDelete: () -> Unit){
 @Composable
 fun PreviewSnackBar(){
     MVVMRollADiceAppTheme {
-        SnackBarUi(it = null) {
+        val hoststae = SnackbarHostState()
+        MySnackBar(snackBarHostState = hoststae) {
+
+        }
+        SnackBarUi(it =null) {
 
         }
     }

@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import com.xs.rolladice.R
 
 object DrawableHandler {
-    public val DrawablesDiceData = listOf(
+    val DrawablesDiceData = listOf(
        R.drawable.num1 to 1,
         R.drawable.num2 to 2,
         R.drawable.num3 to 3,
