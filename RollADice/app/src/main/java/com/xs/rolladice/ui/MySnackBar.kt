@@ -65,10 +65,6 @@ fun SnackBarUi(it:SnackbarData?, onUndoDelete: () -> Unit){
 @Composable
 fun PreviewSnackBar(){
     MVVMRollADiceAppTheme {
-        val hoststae = SnackbarHostState()
-        MySnackBar(snackBarHostState = hoststae) {
-
-        }
         SnackBarUi(it =null) {
 
         }

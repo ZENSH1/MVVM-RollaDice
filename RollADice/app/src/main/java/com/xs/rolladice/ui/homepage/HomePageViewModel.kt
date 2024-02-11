@@ -53,7 +53,7 @@ class HomePageViewModel @Inject constructor(
 
             HomePageEvent.OnRollClick -> {
                 viewModelScope.launch {
-
+                    diceRotation = false
                     buttonPressable = false
                     delay(100)
                     diceRolled = true
@@ -65,7 +65,8 @@ class HomePageViewModel @Inject constructor(
                             date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd / MM / yyyy | HH:mm"))
                         )
                     )
-                    delay(2000)
+                    delay(3500)
+                    diceRotation = true
                     diceRolled = false
                     delay(500)
                     buttonPressable = true

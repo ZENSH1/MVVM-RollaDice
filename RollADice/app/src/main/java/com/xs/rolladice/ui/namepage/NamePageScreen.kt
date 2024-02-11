@@ -84,7 +84,11 @@ fun NamePageScreen(
 
     Scaffold(
         topBar = { MyTopBar(title = "Add/Edit Names", icon = Icons.TwoTone.Create) },
-        snackbarHost = { MySnackBar(snackBarHostState = snackbarHostState, onUndoDelete = { viewModel.onUndoDelete() }) }
+        snackbarHost = {
+            MySnackBar(
+                snackBarHostState = snackbarHostState,
+                onUndoDelete = { viewModel.onUndoDelete() })
+        }
     ) {
 
         Column(
@@ -101,39 +105,51 @@ fun NamePageScreen(
             /**
              * THE TWO MAIN BUTTON COME HERE
              */
-AnimatedVisibility(visible = true) {
-    TwoButtons(
-        showPopUp = { viewModel.onDialogPopup() },
-        viewNames = {
-            viewModel.viewNamesList(!viewModel.showNameList)
-        }
-    )
-}
-
+            AnimatedVisibility(visible = true) {
+                TwoButtons(
+                    showPopUp = { viewModel.onDialogPopup() },
+                    viewNames = {
+                        viewModel.viewNamesList(!viewModel.showNameList)
+                    }
+                )
+            }
 
 
             /**
              * Lazy Column Begins Here
              */
-            AnimatedVisibility(viewModel.showNameList,
-                enter = expandVertically(animationSpec = spring(Spring.DampingRatioMediumBouncy, Spring.StiffnessLow)),
-                exit = shrinkVertically(animationSpec = spring(Spring.DampingRatioNoBouncy, Spring.StiffnessMediumLow))
+            AnimatedVisibility(
+                viewModel.showNameList,
+                enter = expandVertically(
+                    animationSpec = spring(
+                        Spring.DampingRatioMediumBouncy,
+                        Spring.StiffnessLow
+                    )
+                ),
+                exit = shrinkVertically(
+                    animationSpec = spring(
+                        Spring.DampingRatioNoBouncy,
+                        Spring.StiffnessMediumLow
+                    )
+                )
             ) {
-                LazyColumn(modifier = Modifier
-                    .padding(10.dp)
-                    .fillMaxWidth()
-                    .background(color = Color.White)
-                    .animateContentSize(
-                        animationSpec = spring(
-                            Spring.DampingRatioMediumBouncy,
-                            Spring.StiffnessMedium
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .fillMaxWidth()
+                        .background(color = Color.White)
+                        .animateContentSize(
+                            animationSpec = spring(
+                                Spring.DampingRatioMediumBouncy,
+                                Spring.StiffnessMedium
+                            )
                         )
-                    ),) {
+                ) {
                     items(namesList.value) { name ->
                         NameItem(
                             modifier = Modifier.clickable {
                                 //Todo: Here Nav Args are Sent
-                                viewModel.sendUiEvent(UiEvent.Navigate(ROUTES.Home_Page+"?name=${name.name}"))
+                                viewModel.sendUiEvent(UiEvent.Navigate(ROUTES.Home_Page + "?name=${name.name}"))
                             },
                             name = name,
                             onDeleteName = {

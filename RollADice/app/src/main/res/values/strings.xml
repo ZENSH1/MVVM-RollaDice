@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RollADice</string>
+    <string name="roll_a_dice_app">Roll a Dice App</string>
+    <string name="by_person_name">By Zain Sherazi</string>
 </resources>

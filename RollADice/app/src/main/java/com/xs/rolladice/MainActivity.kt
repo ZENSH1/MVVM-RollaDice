@@ -6,17 +6,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavOptions
-import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.NavType
-import androidx.navigation.Navigation
-import androidx.navigation.NavigatorState
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import androidx.navigation.navigation
 import com.xs.rolladice.ui.historypage.HistoryRollScreen
 import com.xs.rolladice.ui.homepage.HomePageScreen
 import com.xs.rolladice.ui.namepage.NamePageScreen
@@ -33,9 +28,7 @@ class MainActivity : ComponentActivity() {
             MVVMRollADiceAppTheme {
                 // A surface container using the 'background' color from the theme
                 val navController = rememberNavController()
-
                 NavHost(navController = navController, startDestination = ROUTES.Splash_Screen) {
-                    
                     composable(ROUTES.Splash_Screen) {
                         SplashScreen {
                             navController.navigate(
@@ -45,7 +38,6 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                     }
-
                     composable(ROUTES.Change_Name) {
                         NamePageScreen(onNavigate = {
                             navController.navigate(it.route)
@@ -53,10 +45,8 @@ class MainActivity : ComponentActivity() {
 
 
                     }
-
                     //Todo: Here is NavArg Composable in Navigation
-                    composable(
-                        ROUTES.Home_Page + "?name={name}",
+                    composable(ROUTES.Home_Page + "?name={name}",
                         arguments = listOf(navArgument(name = "name") {
                             type = NavType.StringType
                             defaultValue = "Guest"
