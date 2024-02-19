@@ -34,7 +34,7 @@ class NamePageViewModel @Inject constructor(
     var nameField by mutableStateOf("")
         private set
 
-    private var className by mutableStateOf<Name?>(null)
+    private var selectedName by mutableStateOf<Name?>(null)
 
     private var recentDeletedName: Name? = null
 
@@ -57,12 +57,15 @@ class NamePageViewModel @Inject constructor(
                 sendUiEvent(UiEvent.ShowSnackBar("Please Input a Name"))
                 return@launch
             }
-            nameRepository.insertName(Name(nameField, className?.id))
-            className = null
+            nameRepository.insertName(Name(nameField, selectedName?.id))
+            selectedName = null
             nameField = ""
             onDialogDismiss()
         }
     }
+
+
+
 
     fun onUndoDelete() {
         viewModelScope.launch {
@@ -85,8 +88,8 @@ class NamePageViewModel @Inject constructor(
 
     fun onDialogEditPop(name: Name) {
         onDialogPopup()
-        className = name
-        nameField = className!!.name
+        selectedName = name
+        nameField = selectedName!!.name
     }
 
     fun onDialogPopup() {
@@ -94,7 +97,10 @@ class NamePageViewModel @Inject constructor(
     }
 
     fun onDialogDismiss() {
+
         showDialog = false
+        selectedName = null
+        nameField = ""
     }
 
     //For ScreenStuff

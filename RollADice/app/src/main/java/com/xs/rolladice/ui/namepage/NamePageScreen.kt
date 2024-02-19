@@ -3,11 +3,17 @@
 package com.xs.rolladice.ui.namepage
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -38,6 +44,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.xs.rolladice.R
 import com.xs.rolladice.ui.MySnackBar
@@ -167,10 +174,15 @@ fun NamePageScreen(
         }
 
         //THE POPUP
-        if (viewModel.showDialog) {
+            AnimatedVisibility (viewModel.showDialog) {
             Dialog(onDismissRequest = {
                 viewModel.onDialogDismiss()
-            }) {
+            },
+                properties = DialogProperties(
+                    dismissOnBackPress = true,
+                    dismissOnClickOutside = true
+                )
+            ) {
                 Card(
                     modifier = Modifier,
                 ) {
